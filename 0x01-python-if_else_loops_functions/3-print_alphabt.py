@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!/usr/bin/python3
 
 # print ASCII alphabets in lowercase
 # except letters q and e
