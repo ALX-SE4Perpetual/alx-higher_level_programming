@@ -14,7 +14,7 @@ if __name__ == '__main__':
         print('Use: username, password, database name, state name')
         exit(1)
 
-        searched = ' '.join(argv[4].split())
+    searched = ' '.join(argv[4].split())
 
     if (re.search('^[a-zA-Z ]+$', searched) is None):
         print('Enter a valid name state (example: Arizona)')
