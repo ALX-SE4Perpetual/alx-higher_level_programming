@@ -1,24 +1,48 @@
 #!/usr/bin/python3
-"""  lists all states from the database hbtn_0e_0_usa """
+"""
+Takes in the name of a state as an argument and
+lists all cities of that state, using
+the database hbtn_0e_4_usa
+"""
 
-import MySQLdb
-import sys
+if __name__ == '__main__':
+    from sys import argv
+    import MySQLdb as mysql
+    import re
 
+    if (len(argv) != 5):
+        print('Use: username, password, database name, state name')
+        exit(1)
 
-if __name__ == "__main__":
-    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
-                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    state_name = ' '.join(argv[4].split())
 
-    cur = db.cursor()
+    if (re.search('^[a-zA-Z ]+$', state_name) is None):
+        print('Enter a valid name state (example: California)')
+        exit(1)
 
-    cur.execute("""SELECT cities.name FROM
-                cities INNER JOIN states ON states.id=cities.state_id
-                WHERE states.name=%s""", (sys.argv[4],))
+    try:
+        db = mysql.connect(host='localhost', port=3306, user=argv[1],
+                           passwd=argv[2], db=argv[3])
 
-    rows = cur.fetchall()
+    except Exception:
+        print('Failed to connect to the database')
+        exit(0)
 
-    tmp = list(row[0] for row in rows)
-        print(*tmp, sep=", ")
+    cursor = db.cursor()
+    cuantity = cursor.execute("""SELECT c.name FROM cities as c
+                              INNER JOIN states as s
+                              ON c.state_id = s.id
+                              WHERE s.name = '{:s}'
+                              ORDER BY c.id ASC;""".format(state_name))
 
-    cur.close()
+    result_query = cursor.fetchall()
+
+    final = []
+
+    for i in range(cuantity):
+        final.append(result_query[i][0])
+
+    print(', '.join(final))
+
+    cursor.close()
     db.close()
