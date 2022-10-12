@@ -24,5 +24,4 @@ if __name__ = "__main__":
 
     for row in states:
         print(f'{row.id}: {row.name}')
-
     session.close()
