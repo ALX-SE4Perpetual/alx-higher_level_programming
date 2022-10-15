@@ -22,9 +22,7 @@ if __name__ = "__main__":
 
     new_row = State(name='Louisiana')
     session.add(new_row)
-    states = session.query(State).filterby(State.name = 'Louisiana').first()
+    new_state = session.query(State).filter_by(State.name = 'Louisiana').first()
+    print(new_state)
     session.commit()
-
-    for row in states:
-        print(row_id)
     session.close()
