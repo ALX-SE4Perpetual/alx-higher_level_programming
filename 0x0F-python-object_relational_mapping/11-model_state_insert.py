@@ -20,9 +20,9 @@ if __name__ = "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    new_row = State(name='Louisiana')
-    session.add(new_row)
-    new_state = session.query(State).filter_by(State.name = 'Louisiana').first()
-    print(new_state)
+    new_state = State(name='Louisiana')
+    session.add(new_state)
+    new_instance = session.query(State).filter_by(name='Louisiana').first()
+    print(new_instance.id)
     session.commit()
     session.close()
