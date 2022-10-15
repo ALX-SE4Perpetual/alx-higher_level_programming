@@ -3,7 +3,8 @@
 Add the State object “Louisiana” to the database hbtn_0e_6_usa
 """
 
-if __name__ = '__main__':
+
+if __name__ = "__main__":
     from sqlalchemy.orm import sessionmaker
     from sqlalchemy import create_engine
     from model_state import Base, State
