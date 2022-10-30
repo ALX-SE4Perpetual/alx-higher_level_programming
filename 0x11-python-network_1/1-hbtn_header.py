@@ -6,6 +6,7 @@ found in the header of the response using sys n urllib.
 import sys
 import urllib.request
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     with urllib.request.urlopen(sys.argv[1]) as response:
         print(response.headers["X-Request-Id"])
