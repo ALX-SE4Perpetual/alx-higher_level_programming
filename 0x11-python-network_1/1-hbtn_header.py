@@ -8,5 +8,5 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    with urllib.urlopen(argv[0]) as response:
+    with urllib.urlopen(argv[2]) as response:
         print(response.info()['X-Request-Id'])
