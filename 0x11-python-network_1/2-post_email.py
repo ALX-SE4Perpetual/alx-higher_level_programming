@@ -16,4 +16,4 @@ if __name__ == "__main__":
     DATA = DATA.encode('ascii')
 
     with urllib.request.urlopen(url, DATA) as response:
-        pront(response.read().decode('utf-8'))
+        print(response.read().decode('utf-8'))
