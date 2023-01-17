@@ -5,16 +5,16 @@
 - takes email as a parameter
 - displays the body of the response
 """
-from sys import argv
-import urllib.parse as parse
-import urllib.request as request
+import sys
+import urllib.parse
+import urllib.request
 
 
 if __name__ == "__main__":
-    url = argv[1]
-    value = {"email": argv[2]}
-    data = parse.urlencode(value).encode("ascii")
-    request = request.Request(url, data)
-    with request.urlopen(request) as response:
-        html = response.read()
-        print(html.decode(encoding="utf-8"))
+    url = sys.argv[1]
+    value = {"email": sys.argv[2]}
+    data = urllib.parse.urlencode(value).encode("ascii")
+
+    request = urllib.request.Request(url, data)
+    with urllib.request.urlopen(request) as response:
+        print(response.read().decode("utf-8"))
